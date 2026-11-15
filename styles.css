@@ -1,0 +1,513 @@
+/* =========================================================
+   VARIABLES Y ESTILOS BASE (PALETA ROSA PASTEL / CELESTE / GyO)
+   ========================================================= */
+:root {
+  --bg-ivory: #fef0f3;
+  --bg-card: #d3dff1;
+  --text-dark: #18191d;
+  --text-muted: #3c4352;
+  --gold: #a62b58;
+  --gold-light: #e4ebf7;
+  --border-soft: rgba(114, 142, 189, 0.44);
+  --shadow-soft: 0 12px 32px rgba(42, 58, 86, 0.08);
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-caps: 'Cinzel', serif;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-ivory);
+}
+
+body {
+  font-family: var(--font-serif);
+  color: var(--text-dark);
+  background-color: var(--bg-ivory);
+  background-image: radial-gradient(rgba(114, 142, 189, 0.16) 1px, transparent 0);
+  background-size: 24px 24px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.locked {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =========================================================
+   1. PANTALLA INTRO (SOBRE CON VIDEO)
+   ========================================================= */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(180deg, var(--bg-ivory) 0%, var(--bg-card) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+
+.intro-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.envelope-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: 520px;
+  pointer-events: none;
+}
+
+.hidden-preload {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.seal-trigger {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 10;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.seal-trigger:disabled {
+  cursor: default;
+}
+
+.intro-hint {
+  position: absolute;
+  bottom: 11%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 82%;
+  max-width: 300px;
+  text-align: center;
+  z-index: 11;
+  transition: opacity 0.4s ease;
+}
+
+.intro-hint.hide-hint {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tap-prompt {
+  font-family: var(--font-caps);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  animation: pulseSoft 2.1s infinite ease-in-out;
+}
+
+.tap-prompt.is-hidden {
+  display: none;
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 0.45; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+.loader-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.loader-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(114, 142, 189, 0.28);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.loader-bar {
+  width: 0%;
+  height: 100%;
+  background: var(--gold);
+  transition: width 0.2s ease;
+}
+
+.loader-text {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   2. CONTENEDOR PRINCIPAL (ONE-PAGE MOBILE FIRST)
+   ========================================================= */
+.invitation-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 44px 20px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.section {
+  text-align: center;
+}
+
+.subtitle-caps {
+  display: block;
+  font-family: var(--font-caps);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.section-heading {
+  font-family: var(--font-script);
+  font-size: 2.6rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 18px;
+}
+
+/* Animación Reveal al hacer scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cita bíblica / frase */
+.verse-section {
+  padding: 12px 10px 4px;
+}
+
+.verse-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.55;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.verse-ref {
+  font-family: var(--font-caps);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+}
+
+/* Nombres */
+.couple-names {
+  font-family: var(--font-script);
+  font-size: 3.3rem;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--text-dark);
+}
+
+.couple-names span {
+  color: var(--gold);
+  font-size: 2.6rem;
+}
+
+.gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+  color: var(--gold);
+  font-size: 0.85rem;
+}
+
+.gold-divider::before,
+.gold-divider::after {
+  content: "";
+  height: 1px;
+  width: 56px;
+  background: var(--border-soft);
+}
+
+/* Fecha y Cuenta Regresiva */
+.date-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 12px 0 22px;
+}
+
+.date-day-name,
+.date-year {
+  font-family: var(--font-caps);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 6px 10px;
+}
+
+.date-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date-number {
+  font-family: var(--font-serif);
+  font-size: 3.1rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.date-month {
+  font-family: var(--font-caps);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.time-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 14px 6px;
+  box-shadow: var(--shadow-soft);
+}
+
+.time-val {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--text-dark);
+}
+
+.time-lbl {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+/* Tarjetas de Ubicación / Invitación */
+.locations-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.event-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 22px;
+  padding: 28px 22px;
+  box-shadow: var(--shadow-soft);
+}
+
+.card-icon {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 12px;
+  color: var(--gold);
+}
+
+.card-title {
+  font-family: var(--font-caps);
+  font-size: 1.05rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.card-time {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.card-venue {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-address {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.btn-outline {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 24px;
+  border: 1px solid var(--gold);
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.42);
+  font-family: var(--font-caps);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: background 0.25s, color 0.25s;
+}
+
+.btn-outline:hover {
+  background: var(--gold);
+  color: #fff;
+}
+
+/* Itinerario */
+.timeline {
+  position: relative;
+  max-width: 340px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 88px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--border-soft);
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 76px 24px 1fr;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tl-time {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--gold);
+  text-align: right;
+}
+
+.tl-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin: 0 auto;
+  box-shadow: 0 0 0 4px var(--bg-ivory);
+}
+
+.tl-info h4 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tl-info p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* Invitación Personalizada (antes RSVP) */
+.rsvp-card {
+  padding: 34px 24px;
+  border-top: 3px solid var(--gold);
+}
+
+.rsvp-invite {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.invite-salutation {
+  display: inline-block;
+  font-family: var(--font-caps);
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.invite-guest {
+  display: inline-block;
+  margin: 10px 0 12px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.55rem, 5.2vw, 2.1rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--gold);
+}
+
+.invite-message {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--text-dark);
+}
+
+/* Footer */
+.footer {
+  padding-top: 12px;
+}
+
+.footer-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+}

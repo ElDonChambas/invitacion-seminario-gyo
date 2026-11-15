@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Gaby &amp; Danny — Jornada 15° de GyO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="locked">
+
+  <!-- =========================================================
+       1. PANTALLA INTRO CON SOBRE INTERACTIVO (<video>)
+       ========================================================= -->
+  <div id="introOverlay" class="intro-overlay" aria-label="Toca el sello para abrir">
+    <video id="envelopeVideoMeta" class="envelope-video hidden-preload" muted playsinline preload="metadata">
+      <source src="media/sobre.mp4" type="video/mp4" />
+    </video>
+    <video id="envelopeVideo" class="envelope-video" muted playsinline preload="auto">
+      <source src="media/sobre.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Área clicable centrada sobre el sello -->
+    <button id="sealTrigger" class="seal-trigger" type="button" aria-label="Abrir sobre" disabled></button>
+
+    <div id="introHint" class="intro-hint">
+      <p id="tapPrompt" class="tap-prompt is-hidden">Toca el sello para abrir</p>
+      <div id="loaderBox" class="loader-box">
+        <div class="loader-track">
+          <div id="loaderBar" class="loader-bar"></div>
+        </div>
+        <span id="loaderText" class="loader-text">Cargando 0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       2. CONTENIDO PRINCIPAL DE LA INVITACIÓN
+       ========================================================= -->
+  <main id="mainContent" class="invitation-wrapper">
+
+    <!-- Cita introductoria -->
+    <section class="section verse-section reveal">
+      <p class="verse-text">
+        "Donde hay amor<br />
+        por la medicina, hay amor<br />
+        por la humanidad."
+      </p>
+      <span class="verse-ref">Hipócrates.</span>
+    </section>
+
+    <!-- Nombres -->
+    <section class="section hero-section reveal">
+      <div class="hero-caption">
+        <span class="subtitle-caps">Seminario de Ginecología y Obstetricia</span>
+        <h1 class="couple-names">15° <span>Jornada</span></h1>
+        <div class="gold-divider"><span>✦</span></div>
+      </div>
+    </section>
+
+    <!-- Fecha y Cuenta Regresiva -->
+    <section class="section countdown-section reveal">
+      <span class="subtitle-caps">Fecha del seminario:</span>
+      <div class="date-display">
+        <span class="date-day-name">Sábado</span>
+        <div class="date-center">
+          <span class="date-number">5</span>
+          <span class="date-month">Diciembre</span>
+        </div>
+        <span class="date-year">2026</span>
+      </div>
+
+      <div id="countdownGrid" class="countdown-grid" data-target="2026-12-05T16:00:00">
+        <div class="time-box">
+          <span id="cdDays" class="time-val">00</span>
+          <span class="time-lbl">Días</span>
+        </div>
+        <div class="time-box">
+          <span id="cdHours" class="time-val">00</span>
+          <span class="time-lbl">Horas</span>
+        </div>
+        <div class="time-box">
+          <span id="cdMinutes" class="time-val">00</span>
+          <span class="time-lbl">Min</span>
+        </div>
+        <div class="time-box">
+          <span id="cdSeconds" class="time-val">00</span>
+          <span class="time-lbl">Seg</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ubicación de la Sede -->
+    <section class="section locations-section reveal">
+      <div class="event-card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"></path>
+            <circle cx="12" cy="11" r="2.5"></circle>
+          </svg>
+        </div>
+        <h2 class="card-title">Sede del Seminario</h2>
+        <p class="card-time">4:00 PM</p>
+        <p class="card-venue">Auditorio Principal</p>
+        <p class="card-address">Dirección de la sede, Ciudad</p>
+        <a class="btn-outline" href="https://maps.google.com" target="_blank" rel="noopener">Ver ubicación</a>
+      </div>
+    </section>
+
+    <!-- Itinerario -->
+    <section class="section itinerary-section reveal">
+      <span class="subtitle-caps">Programa académico</span>
+      <h2 class="section-heading">Itinerario</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="tl-time">4:00 PM</span>
+          <span class="tl-dot"></span>
+          <div class="tl-info">
+            <h4>Registro y Bienvenida</h4>
+            <p>Apertura de la jornada</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="tl-time">6:30 PM</span>
+          <span class="tl-dot"></span>
+          <div class="tl-info">
+            <h4>Presentación de Casos Clínicos</h4>
+            <p>Exposición y análisis en GyO</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="tl-time">8:00 PM</span>
+          <span class="tl-dot"></span>
+          <div class="tl-info">
+            <h4>Discusión Científica</h4>
+            <p>Mesa redonda e intercambio académico</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="tl-time">9:30 PM</span>
+          <span class="tl-dot"></span>
+          <div class="tl-info">
+            <h4>Clausura del Seminario</h4>
+            <p>Cierre y palabras finales</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Invitación Personalizada -->
+    <section class="section rsvp-section reveal">
+      <div class="event-card rsvp-card">
+        <p class="rsvp-invite">
+          <span id="inviteSalutation" class="invite-salutation">Estimado(a)</span><br />
+          <span id="inviteGuest" class="invite-guest">Colega Invitado(a)</span><br />
+          <span id="inviteMessage" class="invite-message">Es un honor invitarle a nuestra jornada 15° de GyO.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer reveal">
+      <p class="footer-sub">Agradecemos de antemano su valiosa participación en esta jornada de Casos Clínicos de
+        Interés en GyO, cuyo objetivo es fortalecer competencias clínicas y fomentar el intercambio científico.</p>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
