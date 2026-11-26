@@ -1,0 +1,13 @@
+{
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/consejo",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/consejo-tecnico",
+      "destination": "/index.html"
+    }
+  ]
+}

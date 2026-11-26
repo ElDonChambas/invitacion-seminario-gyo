@@ -155,34 +155,59 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =========================================================
-     4. PERSONALIZACIÓN POR DOCTOR DESDE LA URL (?dr=clave)
+     4. PERSONALIZACIÓN DESDE LA URL (?dr=clave o /consejo)
      ========================================================= */
   const invitados = {
     espinoza: "Dr. Luis Ernesto Espinoza",
     aguirre: "Dr. Alfredo Aguirre",
-    sandoval: "Dra. Ana Gloria Sandoval"
+    sandoval: "Dra. Ana Gloria Sandoval",
+    sanchez: "Dr. Roberto Edmundo Sánchez Ochoa",
+    consejo: {
+      saludo: "Estimado",
+      nombre: "Consejo Técnico",
+      mensaje: "Es un honor invitarlos a nuestra jornada 18° de GyO.",
+      titulo: "Invitación para el Consejo Técnico — Jornada 18° de GyO"
+    }
+  };
+
+  const rutasEspeciales = {
+    consejo: "consejo",
+    "consejo-tecnico": "consejo"
   };
 
   const params = new URLSearchParams(window.location.search);
-  const clave = (params.get("dr") || "").toLowerCase().trim();
+  const pathSlug = window.location.pathname.replace(/^\/+|\/+$/g, "").toLowerCase();
+  const hashSlug = window.location.hash.replace(/^#/, "").toLowerCase().trim();
+  const drParam = (params.get("dr") || "").toLowerCase().trim();
+  const clave = drParam || rutasEspeciales[pathSlug] || rutasEspeciales[hashSlug] || "";
 
   if (Object.hasOwn(invitados, clave)) {
-    const nombreDoctor = invitados[clave];
-    const esDoctora = /^dra\.?\b|^doctora\b/i.test(nombreDoctor);
+    const entrada = invitados[clave];
     const salutationEl = document.getElementById("inviteSalutation");
     const guestEl = document.getElementById("inviteGuest");
     const messageEl = document.getElementById("inviteMessage");
 
-    if (salutationEl) {
-      salutationEl.textContent = esDoctora ? "Estimada" : "Estimado";
+    let saludo;
+    let nombre;
+    let mensaje;
+    let titulo;
+
+    if (typeof entrada === "string") {
+      const esDoctora = /^dra\.?\b|^doctora\b/i.test(entrada);
+      saludo = esDoctora ? "Estimada" : "Estimado";
+      nombre = entrada;
+      mensaje = `Es un honor ${esDoctora ? "invitarla" : "invitarlo"} a nuestra jornada 18° de GyO.`;
+      titulo = `Invitación para ${entrada} — Jornada 18° de GyO`;
+    } else {
+      saludo = entrada.saludo;
+      nombre = entrada.nombre;
+      mensaje = entrada.mensaje;
+      titulo = entrada.titulo || `Invitación para ${entrada.nombre} — Jornada 18° de GyO`;
     }
-    if (guestEl) {
-      guestEl.textContent = nombreDoctor;
-    }
-    if (messageEl) {
-      const verbo = esDoctora ? "invitarla" : "invitarlo";
-      messageEl.textContent = `Es un honor ${verbo} a nuestra jornada 15° de GyO.`;
-    }
-    document.title = `Invitación para ${nombreDoctor} — Jornada 15° de GyO`;
+
+    if (salutationEl) salutationEl.textContent = saludo;
+    if (guestEl) guestEl.textContent = nombre;
+    if (messageEl) messageEl.textContent = mensaje;
+    document.title = titulo;
   }
 });
